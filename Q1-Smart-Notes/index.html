@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f1">
+  <title>Stillnote — a quieter place for your thoughts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Note navigation">
+      <a class="brand" href="#" aria-label="Stillnote home"><span class="brand-mark">s</span><span>stillnote<span class="brand-period">.</span></span></a>
+      <button class="new-note" id="new-note"><span class="plus">＋</span> New note <kbd>N</kbd></button>
+      <div class="nav-group">
+        <p class="nav-label">WORKSPACE</p>
+        <button class="nav-item active" data-view="all"><span class="nav-icon">▤</span> All notes <span class="nav-count" id="all-count">0</span></button>
+        <button class="nav-item" data-view="pinned"><span class="nav-icon pin-icon">⌁</span> Pinned <span class="nav-count" id="pinned-count">0</span></button>
+      </div>
+      <div class="nav-group folders-group">
+        <div class="section-heading"><p class="nav-label">FOLDERS</p><button class="icon-button add-folder" id="add-folder" title="Add folder" aria-label="Add folder">＋</button></div>
+        <div id="folder-list" class="folder-list"></div>
+      </div>
+      <div class="sidebar-bottom"><div class="storage-icon">◉</div><div><strong>Your thoughts, safe.</strong><span>Saved on this device</span></div><span class="online-dot"></span></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="breadcrumb"><span id="crumb-root">Workspace</span><span class="crumb-separator">/</span><strong id="crumb-current">All notes</strong></div>
+        <div class="topbar-actions"><label class="search-box"><span class="search-icon">⌕</span><input id="search-input" type="search" placeholder="Search your notes..." aria-label="Search notes"><kbd>⌘ K</kbd></label><button class="avatar" title="Your workspace">J</button></div>
+      </header>
+      <section class="content-area">
+        <div class="page-heading"><div><p class="eyebrow" id="page-eyebrow">YOUR PERSONAL SPACE</p><h1 id="page-title">All notes<span class="title-dot">.</span></h1><p class="page-subtitle" id="page-subtitle">A little room to think, plan, and remember.</p></div><button class="primary-button" id="heading-new"><span>＋</span> New note</button></div>
+        <div class="toolbar"><div class="filter-tabs" role="tablist" aria-label="Sort notes"><button class="filter-tab selected" data-sort="recent">Recently edited</button><button class="filter-tab" data-sort="created">Date created</button><button class="filter-tab" data-sort="title">Title</button></div><div class="view-tools"><span id="results-label">0 notes</span><span class="toolbar-divider"></span><button class="view-button active" aria-label="Grid view">▦</button><button class="view-button" aria-label="List view">☰</button></div></div>
+        <div id="pinned-section" class="note-section hidden"><div class="section-title"><span>PINNED</span><span class="section-line"></span></div><div class="notes-grid" id="pinned-grid"></div></div>
+        <div id="notes-section" class="note-section"><div class="section-title" id="notes-section-title"><span>ALL NOTES</span><span class="section-line"></span></div><div class="notes-grid" id="notes-grid"></div></div>
+        <div id="empty-state" class="empty-state hidden"><div class="empty-art"><div class="empty-paper"><span></span><span></span><span></span><i>✳</i></div></div><h2 id="empty-title">A fresh page.</h2><p id="empty-copy">Every good idea starts somewhere. Make your first note.</p><button class="primary-button" id="empty-new"><span>＋</span> Create a note</button></div>
+        <footer class="page-footer"><span>Made for the thoughts worth keeping.</span><span><span class="footer-spark">✳</span> A calm corner of your browser</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="note-dialog" class="note-dialog"><form method="dialog" id="note-form"><div class="dialog-top"><span class="dialog-status"><i></i> <span id="save-status">Draft</span></span><button type="button" class="icon-button close-dialog" aria-label="Close">×</button></div><input id="note-title" class="note-title-input" placeholder="Untitled note" maxlength="100" autocomplete="off"><textarea id="note-content" class="note-content-input" placeholder="Start writing... let your thoughts wander."></textarea><div class="dialog-footer"><div class="note-metadata"><label class="metadata-control"><span>▱</span><select id="note-folder" aria-label="Folder"></select></label><label class="metadata-control tag-control"><span>#</span><input id="note-tags" placeholder="Add tags, separated by commas" aria-label="Tags"></label></div><div class="dialog-actions"><button type="button" class="delete-button hidden" id="delete-note">Delete</button><button type="button" class="pin-button" id="pin-note">◇ <span>Pin</span></button><button type="submit" class="save-button" id="save-note">Done <span>↗</span></button></div></div></form></dialog>
+  <dialog id="folder-dialog" class="small-dialog"><form method="dialog" id="folder-form"><button type="button" class="icon-button close-folder" aria-label="Close">×</button><p class="eyebrow">MAKE A LITTLE SPACE</p><h2>New folder<span class="title-dot">.</span></h2><label class="field-label" for="folder-name">Folder name</label><input id="folder-name" class="field-input" placeholder="e.g. Work, Recipes, Ideas" maxlength="30"><div class="folder-dialog-actions"><button type="button" class="cancel-button" id="cancel-folder">Cancel</button><button type="submit" class="save-button">Create folder <span>↗</span></button></div></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
